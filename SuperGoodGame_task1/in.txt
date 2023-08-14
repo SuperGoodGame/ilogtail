@@ -1,0 +1,1 @@
+status=404|500 or level=INFO and msg=.*test.*
