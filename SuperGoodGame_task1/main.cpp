@@ -9,6 +9,7 @@ const string indentation="  ";
 const string injsonTest="in.txt";
 const string outjsonTest="out.json";
 
+// 过滤二叉树节点
 class FilterNode{
 public:
     FilterNode(){
@@ -21,7 +22,7 @@ protected:
     bool isLeaf;
 
 };
-
+//叶子节点
 class LeafNode:public FilterNode{
 public:
     LeafNode(const string &equ);
@@ -31,7 +32,7 @@ protected:
     string key;
     string exp;
 };
-
+//非叶子节点
 class UnLeafNode:public FilterNode{
 public:
     UnLeafNode(FilterNode *a,FilterNode *b,const string& op);
@@ -40,7 +41,7 @@ protected:
     FilterNode * child[2]{};
     string oper;
 };
-
+//转换
 void UnLeafNode::print(const int &levels, ofstream &outfile) {
 
     if(!this->isRoot) { // 根节点需要特判输出格式括号位置
@@ -79,7 +80,7 @@ UnLeafNode::UnLeafNode(FilterNode *a, FilterNode *b,const string& op) {
     child[0] = a;
     child[1] = b;
 }
-
+// 具有缩进格式的json信息打印
 void FilterNode::printJSON(const int &level, ofstream &outfile, const string &K, const string &val) {
     for(int i=1;i<=level;i++)
         outfile<<indentation;
@@ -125,7 +126,7 @@ private:
 
     FilterNode *root;
 };
-
+//处理读入的表达式
 FilterNode *col::formulaFilter() {
     FilterNode * tem;
     string str;
@@ -162,6 +163,7 @@ FilterNode *col::formulaFilter() {
     return nodeS.top();
 }
 
+//读入初始表达式
 void col::getin() {
     getline(infile,buff);
     buffs<<buff;
@@ -170,9 +172,10 @@ void col::getin() {
 void col::run() {
     int pos=0;
     root = formulaFilter();
-    root->isRoot=1;
+    root->isRoot=1; // 为处理开头格式设置
 }
 
+// 打印转换后json
 void col::print() {
     outfile<<"{\n";
 
