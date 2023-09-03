@@ -1,0 +1,27 @@
+{
+  "filter_expression": {
+    "operator": "or",
+    "operands": [
+      {
+        "operator": "and",
+        "operands": [
+          {
+            "key": "msg",
+            "exp": ".*test.*",
+            "type": "regex"
+          },
+          {
+            "key": "level",
+            "exp": "INFO",
+            "type": "regex"
+          }
+        ]
+      },
+      {
+        "key": "level",
+        "exp": "INFO",
+        "type": "regex"
+      }
+    ]
+  }
+}
